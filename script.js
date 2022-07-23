@@ -7,7 +7,7 @@ for (let i = 0; i < calcBtns.length; i++) {
         if (parseInt(calcBtns[i].innerText) || parseInt(calcBtns[i].innerText) === 0) {
             if (currentDisplay === 0) {
                 if (calcDisplay.innerText.length < 10) {
-                    currentDisplay = calcBtns[i].innerText;
+                    currentDisplay = parseInt(calcBtns[i].innerText);
                     calcDisplay.innerText = currentDisplay;
                 }
             } else {
