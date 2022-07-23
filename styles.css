@@ -9,10 +9,29 @@
 }
 
 .calcMainArea {
-    width: 50%;
+    width: 33%;
     border: 2px solid black;
 }
 
 .calcRow {
     display: flex;
+}
+
+.calcBtn {
+    border: 1px solid black;
+    width: 25%;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.calcDisplay {
+    width: 100%;
+    height: 4rem;
+    font-size: 4rem;
+    text-align: right;
+    resize: none;
 }
