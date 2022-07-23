@@ -10,18 +10,35 @@ let currentDisplay = parseInt(calcDisplay.innerText);
 
 for (let i = 0; i < calcBtnNumber.length; i++) {
     calcBtnNumber[i].addEventListener("click", () => {
-        if (parseInt(calcBtnNumber[i].innerText) || parseInt(calcBtnNumber[i].innerText) === 0) {
-            if (currentDisplay === 0) {
-                if (calcDisplay.innerText.length < 10) {
-                    currentDisplay = parseInt(calcBtnNumber[i].innerText);
-                    calcDisplay.innerText = currentDisplay;
-                }
-            } else {
-                if (calcDisplay.innerText.length < 10) {
-                    currentDisplay = currentDisplay + calcBtnNumber[i].innerText;
-                    calcDisplay.innerText = currentDisplay;
-                }
+        if (currentDisplay === 0) {
+            if (calcDisplay.innerText.length < 10) {
+                currentDisplay = parseInt(calcBtnNumber[i].innerText);
+                calcDisplay.innerText = currentDisplay;
             }
+        } else {
+            if (calcDisplay.innerText.length < 10) {
+                currentDisplay = currentDisplay + calcBtnNumber[i].innerText;
+                calcDisplay.innerText = currentDisplay;
+            }
+        }
+    })
+}
+
+for (let i = 0; i < calcBtnOperator.length; i++) {
+    calcBtnOperator[i].addEventListener("click", () => {
+        switch (calcBtnOperator[i].innerText) {
+            case "+":
+                console.log("Plus");
+                break;
+            case "-":
+                console.log("Minus");
+                break;
+            case "/":
+                console.log("Divide");
+                break;
+            case "x":
+                console.log("Multiply");
+                break;
         }
     })
 }
