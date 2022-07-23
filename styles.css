@@ -17,7 +17,9 @@
     display: flex;
 }
 
-.calcBtn {
+.calcBtn,
+.calcBtnNumber,
+.calcBtnOperator {
     border: 1px solid black;
     width: 25%;
     height: 6rem;
