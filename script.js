@@ -5,9 +5,8 @@ const clearBtn = document.querySelector("#clear");
 const equalBtn = document.querySelector("#equals");
 const allClearBtn = document.querySelector("#allClear");
 
-let currentDisplay = parseInt(calcDisplay.innerText);
 let runningTotal = 0;
-let lastOperator;
+let lastOperator = "";
 
 //Need to figure out how to do a max length on the display that is not a set number
 //Parantheses separate variables when opening and closing
@@ -15,15 +14,13 @@ let lastOperator;
 //Initialize numbers and add event listeners
 for (let i = 0; i < calcBtnNumber.length; i++) {
     calcBtnNumber[i].addEventListener("click", () => {
-        if (currentDisplay === 0 || calcDisplay.innerText === 0) {
+        if (parseInt(calcDisplay.innerText) === 0) {
             if (calcDisplay.innerText.length < 10) {
-                currentDisplay = parseInt(calcBtnNumber[i].innerText);
-                calcDisplay.innerText = currentDisplay;
+                calcDisplay.innerText = parseInt(calcBtnNumber[i].innerText);
             }
         } else {
             if (calcDisplay.innerText.length < 10) {
-                currentDisplay = currentDisplay + calcBtnNumber[i].innerText;
-                calcDisplay.innerText = currentDisplay;
+                calcDisplay.innerText = parseInt(calcDisplay.innerText + calcBtnNumber[i].innerText);
             }
         }
     })
@@ -33,16 +30,23 @@ function calculate(lastOp) {
     switch (lastOp) {
         case "+":
             runningTotal = runningTotal + parseInt(calcDisplay.innerText);
+            calcDisplay.innerText = 0;
             break;
         case "-":
             runningTotal = runningTotal - parseInt(calcDisplay.innerText);
+            calcDisplay.innerText = 0;
             break;
         case "x":
             runningTotal = runningTotal * parseInt(calcDisplay.innerText);
+            calcDisplay.innerText = 0;
             break;
         case "/":
             runningTotal = runningTotal / parseInt(calcDisplay.innerText);
+            calcDisplay.innerText = 0;
             break;
+        case "":
+            runningTotal = parseInt(calcDisplay.innerText);
+            calcDisplay.innerText = 0;
         default:
             return;
     }
@@ -54,35 +58,39 @@ for (let i = 0; i < calcBtnOperator.length; i++) {
         switch (calcBtnOperator[i].innerText) {
             case "+":
                 if (lastOperator === "+") {
-                    let currentValue = parseInt(calcDisplay.innerText);
-                    runningTotal = runningTotal + currentValue;
-                    currentDisplay = 0;
-                    calcDisplay.innerText = runningTotal;
-                    lastOperator = "+";
+                    runningTotal = runningTotal + parseInt(calcDisplay.innerText);
+                    calcDisplay.innerText = 0;
                 } else {
                     calculate(lastOperator);
-                    currentDisplay = 0;
-                    calcDisplay.innerText = runningTotal;
                     lastOperator = "+";
                 }
                 break;
             case "-":
                 if (lastOperator === "-") {
                     runningTotal = runningTotal - parseInt(calcDisplay.innerText);
-                    currentDisplay = 0;
-                    calcDisplay.innerText = runningTotal;
+                    calcDisplay.innerText = 0;
                 } else {
                     calculate(lastOperator);
-                    currentDisplay = 0;
-                    calcDisplay.innerText = runningTotal;
                     lastOperator = "-";
                 }
                 break;
             case "/":
-                console.log("Divide");
+                if (lastOperator === "/") {
+                    runningTotal = runningTotal / parseInt(calcDisplay.innerText);
+                    calcDisplay.innerText = 0;
+                } else {
+                    calculate(lastOperator);
+                    lastOperator = "/";
+                }
                 break;
             case "x":
-                console.log("Multiply");
+                if (lastOperator === "x") {
+                    runningTotal = runningTotal * parseInt(calcDisplay.innerText);
+                    calcDisplay.innerText = 0;
+                } else {
+                    calculate(lastOperator);
+                    lastOperator = "x";
+                }
                 break;
         }
     })
@@ -90,21 +98,19 @@ for (let i = 0; i < calcBtnOperator.length; i++) {
 
 //Initialize clear button and add event listener
 clearBtn.addEventListener("click", () => {
-    currentDisplay = 0;
-    calcDisplay.innerText = currentDisplay;
+    calcDisplay.innerText = 0;
 })
 
 //Initialize all clear button and add event listener
 allClearBtn.addEventListener("click", () => {
-    currentDisplay = 0;
     calcDisplay.innerText = 0;
     runningTotal = 0;
 })
 
 //Initialize equal button and add event listener
 equalBtn.addEventListener("click", () => {
-    runningTotal = runningTotal + parseInt(calcDisplay.innerText);
+    calculate(lastOperator);
     calcDisplay.innerText = runningTotal;
-    currentDisplay = 0;
     runningTotal = 0;
+    lastOperator = "";
 })
