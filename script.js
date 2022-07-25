@@ -7,9 +7,9 @@ const allClearBtn = document.querySelector("#allClear");
 
 let currentDisplay = parseInt(calcDisplay.innerText);
 let runningTotal = 0;
+let lastOperator;
 
 //Need to figure out how to do a max length on the display that is not a set number
-//Doing math may require a variable that keeps adding on the calculators requests and then equal will runt he calculation?
 //Parantheses separate variables when opening and closing
 
 //Initialize numbers and add event listeners
@@ -29,18 +29,54 @@ for (let i = 0; i < calcBtnNumber.length; i++) {
     })
 }
 
+function calculate(lastOp) {
+    switch (lastOp) {
+        case "+":
+            runningTotal = runningTotal + parseInt(calcDisplay.innerText);
+            break;
+        case "-":
+            runningTotal = runningTotal - parseInt(calcDisplay.innerText);
+            break;
+        case "x":
+            runningTotal = runningTotal * parseInt(calcDisplay.innerText);
+            break;
+        case "/":
+            runningTotal = runningTotal / parseInt(calcDisplay.innerText);
+            break;
+        default:
+            return;
+    }
+}
+
 //Initialize operators and add event listeners
 for (let i = 0; i < calcBtnOperator.length; i++) {
     calcBtnOperator[i].addEventListener("click", () => {
         switch (calcBtnOperator[i].innerText) {
             case "+":
-                runningTotal = runningTotal + parseInt(calcDisplay.innerText);
-                currentDisplay = 0;
-                calcDisplay.innerText = runningTotal;
-                console.log(runningTotal);
+                if (lastOperator === "+") {
+                    let currentValue = parseInt(calcDisplay.innerText);
+                    runningTotal = runningTotal + currentValue;
+                    currentDisplay = 0;
+                    calcDisplay.innerText = runningTotal;
+                    lastOperator = "+";
+                } else {
+                    calculate(lastOperator);
+                    currentDisplay = 0;
+                    calcDisplay.innerText = runningTotal;
+                    lastOperator = "+";
+                }
                 break;
             case "-":
-                console.log("Minus");
+                if (lastOperator === "-") {
+                    runningTotal = runningTotal - parseInt(calcDisplay.innerText);
+                    currentDisplay = 0;
+                    calcDisplay.innerText = runningTotal;
+                } else {
+                    calculate(lastOperator);
+                    currentDisplay = 0;
+                    calcDisplay.innerText = runningTotal;
+                    lastOperator = "-";
+                }
                 break;
             case "/":
                 console.log("Divide");
