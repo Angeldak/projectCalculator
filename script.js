@@ -37,12 +37,20 @@ function calculate(lastOp) {
             calcDisplay.innerText = 0;
             break;
         case "x":
-            runningTotal = runningTotal * parseInt(calcDisplay.innerText);
-            calcDisplay.innerText = 0;
+            if (parseInt(calcDisplay.innerText) === 0) {
+                break;
+            } else {
+                runningTotal = runningTotal * parseInt(calcDisplay.innerText);
+                calcDisplay.innerText = 0;
+            }
             break;
         case "/":
-            runningTotal = runningTotal / parseInt(calcDisplay.innerText);
-            calcDisplay.innerText = 0;
+            if (parseInt(calcDisplay.innerText) === 0) {
+                break;
+            } else {
+                runningTotal = runningTotal / parseInt(calcDisplay.innerText);
+                calcDisplay.innerText = 0;
+            }
             break;
         case "":
             runningTotal = parseInt(calcDisplay.innerText);
