@@ -10,9 +10,10 @@ let lastOperator = "";
 let finalEqual = 0;
 
 //Need to figure out how to do a max length on the display that is not a set number
-//Parantheses separate variables when opening and closing
+//Need to parseFloat in-place of parseInt
+//Parantheses separate variables when opening and closing??
 
-//Initialize numbers and add event listeners
+//Initialize numbers to update display
 for (let i = 0; i < calcBtnNumber.length; i++) {
     calcBtnNumber[i].addEventListener("click", () => {
         if (parseInt(calcDisplay.innerText) === 0) {
@@ -27,6 +28,7 @@ for (let i = 0; i < calcBtnNumber.length; i++) {
     })
 }
 
+//Mathmatical function for last operator used with crude compatibility of multiplying and dividing by zero
 function calculate(lastOp) {
     switch (lastOp) {
         case "+":
@@ -61,7 +63,7 @@ function calculate(lastOp) {
     }
 }
 
-//Initialize operators and add event listeners
+//Initialize operators to update runningTotal and check for lastOperator
 for (let i = 0; i < calcBtnOperator.length; i++) {
     calcBtnOperator[i].addEventListener("click", () => {
         switch (calcBtnOperator[i].innerText) {
@@ -105,18 +107,18 @@ for (let i = 0; i < calcBtnOperator.length; i++) {
     })
 }
 
-//Initialize clear button and add event listener
+//Initialize clear button to clear display only
 clearBtn.addEventListener("click", () => {
     calcDisplay.innerText = 0;
 })
 
-//Initialize all clear button and add event listener
+//Initialize all clear button to clear display and reset runningTotal
 allClearBtn.addEventListener("click", () => {
     calcDisplay.innerText = 0;
     runningTotal = 0;
 })
 
-//Initialize equal button and add event listener
+//Initialize equal button to run final calculation and reset lastOperator
 equalBtn.addEventListener("click", () => {
     finalEqual = 1;
     calculate(lastOperator);
