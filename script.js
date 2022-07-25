@@ -7,6 +7,7 @@ const allClearBtn = document.querySelector("#allClear");
 
 let runningTotal = 0;
 let lastOperator = "";
+let finalEqual = 0;
 
 //Need to figure out how to do a max length on the display that is not a set number
 //Parantheses separate variables when opening and closing
@@ -37,7 +38,7 @@ function calculate(lastOp) {
             calcDisplay.innerText = 0;
             break;
         case "x":
-            if (parseInt(calcDisplay.innerText) === 0) {
+            if (parseInt(calcDisplay.innerText) === 0 && finalEqual !== 1) {
                 break;
             } else {
                 runningTotal = runningTotal * parseInt(calcDisplay.innerText);
@@ -45,7 +46,7 @@ function calculate(lastOp) {
             }
             break;
         case "/":
-            if (parseInt(calcDisplay.innerText) === 0) {
+            if (parseInt(calcDisplay.innerText) === 0 && finalEqual !== 1) {
                 break;
             } else {
                 runningTotal = runningTotal / parseInt(calcDisplay.innerText);
@@ -117,8 +118,10 @@ allClearBtn.addEventListener("click", () => {
 
 //Initialize equal button and add event listener
 equalBtn.addEventListener("click", () => {
+    finalEqual = 1;
     calculate(lastOperator);
     calcDisplay.innerText = runningTotal;
     runningTotal = 0;
     lastOperator = "";
+    finalEqual = 0;
 })
