@@ -11,8 +11,8 @@ let lastOperator = "";
 let finalEqual = 0;
 
 //Need to figure out how to do a max length on the display that is not a set number
-//Need to parseFloat in-place of parseInt
 //Parantheses separate variables when opening and closing??
+//need to fix the decimal not working with zero as first digit ex: 0.5
 
 //Initialize numbers to update display
 for (let i = 0; i < calcBtnNumber.length; i++) {
