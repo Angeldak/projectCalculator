@@ -11,19 +11,17 @@ let lastOperator = "";
 let finalEqual = 0;
 
 //Need to figure out how to do a max length on the display that is not a set number
-//Parantheses separate variables when opening and closing??
-//need to fix the decimal not working with zero as first digit ex: 0.5
 
 //Initialize numbers to update display
 for (let i = 0; i < calcBtnNumber.length; i++) {
     calcBtnNumber[i].addEventListener("click", () => {
-        if (!String(calcDisplay).includes(".") && parseFloat(calcDisplay.innerText) === 0) {
+        if (parseInt(calcDisplay.innerText) === 0 && calcDisplay.innerText.indexOf(".") === -1) {
             if (calcDisplay.innerText.length < 10) {
                 calcDisplay.innerText = calcBtnNumber[i].innerText;
             }
         } else {
             if (calcDisplay.innerText.length < 10) {
-                calcDisplay.innerText = String(calcDisplay.innerText + calcBtnNumber[i].innerText);
+                calcDisplay.innerText = calcDisplay.innerText + calcBtnNumber[i].innerText;
             }
         }
     })

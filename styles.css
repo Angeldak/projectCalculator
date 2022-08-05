@@ -1,3 +1,8 @@
+html {
+    background-color: #342E37;
+    color: #0AFFF7;
+}
+
 .calcHeader {
     text-align: center;
 }
@@ -10,7 +15,7 @@
 
 .calcMainArea {
     width: 33%;
-    border: 2px solid black;
+    border: 2px solid #0AFFF7;
 }
 
 .calcRow {
@@ -19,8 +24,9 @@
 
 .calcBtn,
 .calcBtnNumber,
-.calcBtnOperator {
-    border: 1px solid black;
+.calcBtnOperator,
+.logoBtn {
+    border: 1px solid #0AFFF7;
     width: 25%;
     height: 6rem;
     display: flex;
@@ -39,4 +45,17 @@
     white-space: nowrap;
     text-overflow: clip;
     overflow: hidden;
+}
+
+.logoBtn {
+    padding: 0 auto;
+    width: 50%;
+    font-size: 2rem;
+    font-weight: lighter;
+}
+
+.calcBtn:hover,
+.calcBtnNumber:hover,
+.calcBtnOperator:hover {
+    background-color: #138E90;
 }
